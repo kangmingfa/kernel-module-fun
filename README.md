@@ -10,13 +10,12 @@ how. This is all tested using the `4.19.0-9` kernel.
 
 **`hello.c`**: a simple "hello world" module
 
-who-connect-me.c: a custom netfilter hook to log remote address from TCP SYN packet
+**`who-connect-me.c`**: a custom netfilter hook to log remote address from TCP SYN packet
 
 ~~**`hello-packet.c`**: logs every time your computer receives a packet.
   This one could easily be modified to drop packets 50% of the time.~~
 
-~~**`rootkit.c`**: A simple rootkit.
-  [blog post explaining it more~~](http://jvns.ca/blog/2013/10/08/day-6-i-wrote-a-rootkit/)
+~~**`rootkit.c`**: A simple rootkit. [blog post explaining it more](http://jvns.ca/blog/2013/10/08/day-6-i-wrote-a-rootkit/)~~
 
 ## Compiling them
 
@@ -24,9 +23,6 @@ I'm running Linux `4.19.0-9`. (run `uname -r`) to find out what you're
 using. This almost certainly won't work with a `2.x` kernel, and I
 don't know enough. It is unlikely to do any lasting damage to your
 computer, but I can't guarantee anything.
-
-I have my kernel sources set up in `/lib/modules/3.5.0-18-generic`. I
-think I only needed to run
 
 ```
 sudo apt-get install linux-headers-$(uname -r)
