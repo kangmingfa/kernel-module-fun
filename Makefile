@@ -1,6 +1,7 @@
 CONFIG_STACK_VALIDATION=
 obj-m += hello.o
 obj-m += who-connect-me.o
+obj-m += add-arp-records.o
 obj-m += excited_virus.o
 
 all:
