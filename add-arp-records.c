@@ -4,13 +4,14 @@
 #include <linux/netfilter.h>
 #include <linux/netfilter_ipv4.h>
 #include <linux/netdevice.h>    // net_device
-#include <linux/vmalloc.h>
 #include <linux/skbuff.h>       // skb
 #include <linux/socket.h>       // PF_INET
 #include <linux/ip.h>           // iphdr
+#include <linux/tcp.h>          // tcphdr
 #include <net/arp.h>            // arptable
 #include <net/neighbour.h>      // neighbour
 #include <net/net_namespace.h>  // net
+
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Asphaltt");
@@ -18,11 +19,11 @@ MODULE_DESCRIPTION("A add_arp_records Module");
 
 enum {
   NF_IP_PRE_ROUTING,
-    NF_IP_LOCAL_IN,
-    NF_IP_FORWARD,
-    NF_IP_LOCAL_OUT,
-    NF_IP_POST_ROUTING,
-    NF_IP_NUMHOOKS
+  NF_IP_LOCAL_IN,
+  NF_IP_FORWARD,
+  NF_IP_LOCAL_OUT,
+  NF_IP_POST_ROUTING,
+  NF_IP_NUMHOOKS
 };
 
 enum {
@@ -44,42 +45,6 @@ enum nf_br_hook_priorities {
   NF_BR_PRI_FILTER_OTHER = 200,
   NF_BR_PRI_NAT_SRC = 300,
   NF_BR_PRI_LAST = INT_MAX,
-};
-
-
-struct tcphdr {
-  __be16  source;
-  __be16  dest;
-  __be32  seq;
-  __be32  ack_seq;
-#if defined(__LITTLE_ENDIAN_BITFIELD)
-  __u16 res1:4,
-    doff:4,
-    fin:1,
-    syn:1,
-    rst:1,
-    psh:1,
-    ack:1,
-    urg:1,
-    ece:1,
-    cwr:1;
-#elif defined(__BIG_ENDIAN_BITFIELD)
-  __u16 doff:4,
-    res1:4,
-    cwr:1,
-    ece:1,
-    urg:1,
-    ack:1,
-    psh:1,
-    rst:1,
-    syn:1,
-    fin:1;
-#else
-#error  "Adjust your <asm/byteorder.h> defines"
-#endif
-  __be16  window;
-  __sum16 check;
-  __be16  urg_ptr;
 };
 
 unsigned int add_arp_records_hook(void *priv,

@@ -14,6 +14,8 @@ how. This is all tested using the `4.19.0-9` kernel.
 
 **`add-arp-records.c`**: a custom netfilter hook to add arp records to global arp table
 
+**`check-tcp-syncookies.c`**: a custom netfilter hook to check mss from tcp syncookies
+
 ~~**`hello-packet.c`**: logs every time your computer receives a packet.
   This one could easily be modified to drop packets 50% of the time.~~
 

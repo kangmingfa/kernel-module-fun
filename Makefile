@@ -3,6 +3,7 @@ obj-m += hello.o
 obj-m += who-connect-me.o
 obj-m += add-arp-records.o
 obj-m += excited_virus.o
+obj-m += check-tcp-syncookies.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
