@@ -33,20 +33,17 @@ static int custom_nl_send_msg(struct nlmsghdr *nlh, __u32 result, const unsigned
     int pid = nlh->nlmsg_pid, res = -1;
     const unsigned char *resp_msg = "Echo from kernel: ";
 
-    data_size += 4;
-    if (data_size == 4)
-    {
-        resp = kzalloc(data_size, GFP_KERNEL);
-    }
-    else
-    {
-        resp = kzalloc(data_size + 18, GFP_KERNEL);
-        memcpy(resp->data, resp_msg, 18);
-        memcpy(resp->data + 18, data, data_size-4);
+    if (data_size != 0)
         data_size += 18;
-    }
+    data_size += 4;
+    resp = kzalloc(data_size, GFP_KERNEL);
     if (!resp)
         return res;
+    if (data_size != 4)
+    {
+        memcpy(resp->data, resp_msg, 18);
+        memcpy(resp->data + 18, data, data_size - 4);
+    }
     resp->result = result;
 
     skb = nlmsg_new(data_size, GFP_KERNEL);
@@ -71,14 +68,15 @@ static void custom_nl_recv_msg(struct sk_buff *skb)
 
     nlh = nlmsg_hdr(skb);
     nl_data = (unsigned char *)NLMSG_DATA(nlh);
-    msg_size = *(__u32*)nl_data;
-    if (msg_size > 1024) {
+    msg_size = *(__u32 *)nl_data;
+    if (msg_size > 1024)
+    {
         custom_nl_send_msg(nlh, nlresp_result_invalid, NULL, 0);
         return;
     }
 
-    msg = nl_data+4;
-    msg[msg_size-1] = '\0';
+    msg = nl_data + 4;
+    msg[msg_size - 1] = '\0';
     printk(KERN_INFO "[Y] [custom netlink] receive msg from user: %s\n", msg);
 
     custom_nl_send_msg(nlh, nlresp_result_ok, msg, msg_size);
