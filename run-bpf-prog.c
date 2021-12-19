@@ -61,7 +61,7 @@ static int init_run_bpf_prog_netfilter_hook(struct net *net) {
 static int run_bpf_prog_net_init(struct net *net) {
   if (__bpf_check_path(&bp) != 0) {
     printk(KERN_ERR "[x] Register run_bpf_prog module failed\n");
-    return 0;
+    return -1;
   }
 
   printk(KERN_INFO "[+] bpf prog path: %s\n", bpf_path);
@@ -72,7 +72,7 @@ static int run_bpf_prog_net_init(struct net *net) {
 
 static void run_bpf_prog_net_exit(struct net *net) {
   nf_unregister_net_hook(net, &nfhook);
-  if (bp) bpf_prog_destroy(bp);
+  if (bp != NULL) bpf_prog_destroy(bp);
   printk(KERN_INFO "[-] Cleaning up run_bpf_prog module.\n");
 }
 
