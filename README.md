@@ -20,6 +20,8 @@ how. This is all tested using the `4.19.0-9` kernel.
 
 **`kprobe_tcp_conn_request`**: a custom kprobe to learn getting argument from kprobing function
 
+**`run-bpf-prog`**: run bpf prog in kernel module, based on [github.com/Asphaltt/iptables-bpf](https://github.com/Asphaltt/iptables-bpf)
+
 ~~**`hello-packet.c`**: logs every time your computer receives a packet.
   This one could easily be modified to drop packets 50% of the time.~~
 

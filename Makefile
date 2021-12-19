@@ -9,6 +9,7 @@ obj-m += excited_virus.o
 obj-m += check-tcp-syncookies.o
 obj-m += custom-netlink.o
 obj-m += kprobe_tcp_conn_request.o
+obj-m += run-bpf-prog.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

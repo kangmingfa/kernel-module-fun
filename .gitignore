@@ -1,0 +1,12 @@
+
+# editor
+.vscode/
+
+# kernel module
+*.cmd
+*.ko
+*.mod
+*.mod.c
+*.o
+*.order
+Module.symvers
