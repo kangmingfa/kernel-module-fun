@@ -72,6 +72,7 @@ static int run_bpf_prog_net_init(struct net *net) {
 
 static void run_bpf_prog_net_exit(struct net *net) {
   nf_unregister_net_hook(net, &nfhook);
+  if (bp) bpf_prog_destroy(bp);
   printk(KERN_INFO "[-] Cleaning up run_bpf_prog module.\n");
 }
 
