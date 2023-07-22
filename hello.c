@@ -2,6 +2,11 @@
 #include <linux/kernel.h>    // included for KERN_INFO
 #include <linux/init.h>      // included for __init and __exit macros
 
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Asphaltt");
+MODULE_DESCRIPTION("A who-connect-me Module");
+
+
 static int __init hello_init(void)
 {
     printk(KERN_INFO "Hello, hacker school!!!\n");
