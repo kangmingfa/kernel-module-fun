@@ -3,7 +3,7 @@ CONFIG_STACK_VALIDATION=
 ccflags-y  := -I.
 
 obj-m += hello.o
-obj-m += who-connect-me.o
+obj-m += add-tcp-options.o
 
 
 all:
