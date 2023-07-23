@@ -17,7 +17,7 @@ tcp.port eq 8888
 
 ## Compiling them
 
-I'm running Linux `4.19.0-9`. (run `uname -r`) to find out what you're
+I'm running Linux `4.19.0-9` / `5.4.0-150`. (run `uname -r`) to find out what you're
 using. This almost certainly won't work with a `2.x` kernel, and I
 don't know enough. It is unlikely to do any lasting damage to your
 computer, but I can't guarantee anything.
